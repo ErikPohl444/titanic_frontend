@@ -47,9 +47,7 @@ function App() {
         <h1>Filtered count {TitanicData.filter(item => Number(item.Survived) === toggleState).length}</h1>
         <h2>TitanicCounter</h2>
         <Counter data={TitanicData.filter(item => Number(item.Survived) === toggleState)}/>
-
-        <h2>Tabular</h2>
-        <GenericTable data={TitanicData} />
+          
       </header>
     </div>
   );
