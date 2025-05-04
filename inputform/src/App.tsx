@@ -1,63 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback } from 'react';
+import "./App.css";
+import TitanicData from "./titanic.json";
+import Counter from "./Counter";
+import { data } from "./Constants";
+import DataTable from "./DataTable";
+import MyButton from "./MyButton";
+import GenericTable from "./GenericTable";
 
-interface ButtonProps {
-  buttontext: string;
-
+interface ToggleProps {
+  initialValue: number;
+  onToggle: (value: number) => void;
 }
 
-interface TableData {
-  id: number;
-  name: string;
-  age: number;
-  occupation: string;
-}
- 
- const data: TableData[] = [
-  { id: 1, name: "John Doe", age: 30, occupation: "Engineer" },
-  { id: 2, name: "Jane Smith", age: 25, occupation: "Designer" },
-  { id: 3, name: "Peter Jones", age: 40, occupation: "Manager" },
- ];
- 
- function DataTable()  {
+const Toggle: React.FC<ToggleProps> = ({ initialValue, onToggle }) => {
+  const [isOn, setIsOn] = useState<number>(initialValue);
+
+  const toggle = useCallback(() => {
+    const newValue = isOn === 0 ? 1 : 0;
+    setIsOn(newValue);
+    onToggle(newValue);
+  }, [isOn, onToggle]);
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Occupation</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item) => (
-          <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.name}</td>
-            <td>{item.age}</td>
-            <td>{item.occupation}</td>
-            <td>{item.occupation}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <button onClick={toggle}>
+      {isOn}
+    </button>
   );
- };
-
-function MyButton(props: ButtonProps) {
-    function handleClick() {
-      alert('You clicked me!');
-    }
-
-    return (
-      <button onClick={handleClick}>{props.buttontext}</button>
-    );
-  }
-  
+};
 function App() {
   let myname: string = "Erik";
+
+  let filteredItems = TitanicData.filter(item => item.Survived === "0");
+
+  const [toggleState, setToggleState] = useState<number>(0);
+  
+  const handleToggleChange = (newValue: number) => {
+    setToggleState(newValue);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -72,11 +52,14 @@ function App() {
         >
           Learn React
         </a>
+        <Toggle initialValue={toggleState} onToggle={handleToggleChange} />
+        <h1>{toggleState}</h1>
+        <h1>{TitanicData.filter(item => Number(item.Survived) === toggleState).length}</h1>
+        <h2>TitanicCounter</h2>
+        <Counter data={TitanicData.filter(item => Number(item.Survived) === toggleState)}/>
 
-        <h1>Hello, React with TypeScript and {myname}! yay</h1>
-            <MyButton buttontext="click this button"/>
-        <p>Click the button above!</p>
-        <DataTable/>
+        <h2>Tabular</h2>
+        <GenericTable data={TitanicData} />
       </header>
     </div>
   );
