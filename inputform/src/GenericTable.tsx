@@ -11,8 +11,13 @@ const GenericTable = <T extends Record<string, any>>({ data }: TableProps<T>): a
 
   const columns = Object.keys(data[0]);
 
+  const tableCellStyle = {
+    border: '1px solid white',
+    padding: '8px',
+  };
+
   return (
-    <table>
+    <table style={{ border: '1px solid white', borderCollapse: 'collapse' }}> 
       <thead>
         <tr>
           {columns.map((column) => (
@@ -24,7 +29,7 @@ const GenericTable = <T extends Record<string, any>>({ data }: TableProps<T>): a
         {data.map((row, index) => (
           <tr key={index}>
             {columns.map((column) => (
-              <td key={column}>{row[column]}</td>
+              <td style={tableCellStyle} key={column}>{row[column]}</td>
             ))}
           </tr>
         ))}

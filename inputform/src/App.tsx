@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import "./App.css";
 import TitanicData from "./titanic.json";
@@ -22,8 +23,8 @@ const Toggle: React.FC<ToggleProps> = ({ initialValue, onToggle }) => {
   }, [isOn, onToggle]);
 
   return (
-    <button onClick={toggle}>
-      {isOn}
+    <button onClick={toggle} name="survival button">
+      {isOn ? "Survived" : "Did not survive"} 
     </button>
   );
 };
@@ -41,20 +42,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Toggle initialValue={toggleState} onToggle={handleToggleChange} />
-        <h1>{toggleState}</h1>
-        <h1>{TitanicData.filter(item => Number(item.Survived) === toggleState).length}</h1>
+        <h1>Toggle whether survived or did not </h1>
+        <Toggle initialValue={toggleState} onToggle={handleToggleChange}/>
+        <h1>Filtered count {TitanicData.filter(item => Number(item.Survived) === toggleState).length}</h1>
         <h2>TitanicCounter</h2>
         <Counter data={TitanicData.filter(item => Number(item.Survived) === toggleState)}/>
 
