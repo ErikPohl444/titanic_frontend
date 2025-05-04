@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import TitanicData from "./titanic.json";
 import Counter from "./Counter";
@@ -22,19 +22,44 @@ function App() {
       Number(item.Survived) === toggleState && item.Sex === genderToggleState
   );
 
+  const tableCellStyle = {
+    border: '1px solid white',
+    padding: '8px',
+  };
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Toggle whether survived or did not </h1>
-        <SurvivedToggle initialValue={toggleState} onToggle={handleToggleChange} />
-        <h1>Toggle gender</h1>
-        <GenderToggle
-          initialValue={genderToggleState}
-          onToggle={handleGenderToggleChange}
-        />
+        <h1>Titanic Dataset Front-End Query Tool</h1>
+        <h2>Filter by:</h2>
+        <table style={{ border: '1px solid white', borderCollapse: 'collapse' }}>
+          <tbody>
+            <tr>
+              <td></td>
+              <td style={tableCellStyle}>Status</td>
+              <td style={tableCellStyle}>Biological Sex</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style={tableCellStyle}>
+                {" "}
+                <SurvivedToggle
+                  initialValue={toggleState}
+                  onToggle={handleToggleChange}
+                />
+              </td>
+              <td style={tableCellStyle}>
+                {" "}
+                <GenderToggle
+                  initialValue={genderToggleState}
+                  onToggle={handleGenderToggleChange}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <h1>Filtered count {survivedGenderFilteredData.length}</h1>
-        <h2>TitanicCounter</h2>
+        <h2>Filtered count {survivedGenderFilteredData.length}</h2>
+        <h3>Data Scrolling</h3>
         <Counter data={survivedGenderFilteredData} />
       </header>
     </div>

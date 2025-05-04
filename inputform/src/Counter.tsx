@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { TitanicDataType } from "./Constants";
-import JSONOutput from "./JSONOutput";
 import GenericTable from "./GenericTable";
 
 function Counter({ data }: { data: TitanicDataType[] }) {
