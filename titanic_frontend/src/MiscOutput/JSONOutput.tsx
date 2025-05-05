@@ -1,5 +1,5 @@
 import React from "react";
-import { TitanicDataType } from "./Constants";
+import { TitanicDataType } from "../Constants";
 
 function JSONOutput({ data }: { data: TitanicDataType[] }) {
   return (

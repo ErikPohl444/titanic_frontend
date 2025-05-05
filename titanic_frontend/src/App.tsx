@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import TitanicData from "./titanic.json";
-import Counter from "./Counter";
-import GenderToggle from "./GenderToggle";
-import SurvivedToggle from "./SurvivedToggle";
+import TitanicData from "./data/titanic.json";
+import Counter from "./Tables/Counter";
+import GenderToggle from "./Buttons/GenderToggle";
+import SurvivedToggle from "./Buttons/SurvivedToggle";
 
 function App() {
   const [toggleState, setToggleState] = useState<number>(0);

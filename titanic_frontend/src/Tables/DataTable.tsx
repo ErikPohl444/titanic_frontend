@@ -1,5 +1,5 @@
 import React from "react";
-import { TableData } from "./Constants";
+import { TableData } from "../Constants";
 
 function DataTable({ data }: { data: TableData[] }) {
   return (

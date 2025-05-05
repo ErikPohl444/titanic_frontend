@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonProps } from "./Constants";
+import { ButtonProps } from "../Constants";
 function MyButton(props: ButtonProps) {
   function handleClick() {
     alert("You clicked me!");
