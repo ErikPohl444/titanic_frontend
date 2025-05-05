@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
 
 interface TableProps<T> {
   data: T[];
 }
 
-const GenericTable = <T extends Record<string, any>>({ data }: TableProps<T>): any => {
+const GenericTable = <T extends Record<string, any>>({
+  data,
+}: TableProps<T>): any => {
   if (!data || data.length === 0) {
     return <p>No data available.</p>;
   }
@@ -12,12 +14,12 @@ const GenericTable = <T extends Record<string, any>>({ data }: TableProps<T>): a
   const columns = Object.keys(data[0]);
 
   const tableCellStyle = {
-    border: '1px solid white',
-    padding: '8px',
+    border: "1px solid white",
+    padding: "8px",
   };
 
   return (
-    <table style={{ border: '1px solid white', borderCollapse: 'collapse' }}> 
+    <table style={{ border: "1px solid white", borderCollapse: "collapse" }}>
       <thead>
         <tr>
           {columns.map((column) => (
@@ -29,7 +31,9 @@ const GenericTable = <T extends Record<string, any>>({ data }: TableProps<T>): a
         {data.map((row, index) => (
           <tr key={index}>
             {columns.map((column) => (
-              <td style={tableCellStyle} key={column}>{row[column]}</td>
+              <td style={tableCellStyle} key={column}>
+                {row[column]}
+              </td>
             ))}
           </tr>
         ))}

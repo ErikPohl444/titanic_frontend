@@ -23,15 +23,17 @@ function App() {
   );
 
   const tableCellStyle = {
-    border: '1px solid white',
-    padding: '8px',
+    border: "1px solid white",
+    padding: "8px",
   };
   return (
     <div className="App">
       <header className="App-header">
         <h1>Titanic Dataset Front-End Query Tool</h1>
         <h2>Filter by:</h2>
-        <table style={{ border: '1px solid white', borderCollapse: 'collapse' }}>
+        <table
+          style={{ border: "1px solid white", borderCollapse: "collapse" }}
+        >
           <tbody>
             <tr>
               <td></td>

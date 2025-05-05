@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function BinaryToggleButton() {
   const [isOn, setIsOn] = useState(false);
@@ -7,11 +7,7 @@ function BinaryToggleButton() {
     setIsOn(!isOn);
   };
 
-  return (
-    <button onClick={toggleHandler}>
-      {isOn ? 1 : 0}
-    </button>
-  );
+  return <button onClick={toggleHandler}>{isOn ? 1 : 0}</button>;
 }
 
 export default BinaryToggleButton;
