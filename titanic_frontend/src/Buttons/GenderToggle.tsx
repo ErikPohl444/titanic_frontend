@@ -18,7 +18,7 @@ const GenderToggle: React.FC<GenderToggleProps> = ({
   }, [gender, onToggle]);
 
   return (
-    <button onClick={toggle} name="gender button">
+    <button onClick={toggle} name="genderbutton">
       {gender}
     </button>
   );
