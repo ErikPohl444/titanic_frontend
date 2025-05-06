@@ -5,7 +5,7 @@ import GenderToggle from "./GenderToggle";
 describe("GenderToggle Component", () => {
   test("renders with the initial value", () => {
     render(<GenderToggle initialValue="male" onToggle={jest.fn()} />);
-    const button = screen.getByRole("button", {name: "male"});
+    const button = screen.getByRole("button", { name: "male" });
     expect(button).toHaveTextContent("male");
   });
 
