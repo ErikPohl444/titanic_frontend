@@ -1,4 +1,5 @@
 import React from "react";
+import log from "../Logging/Logger";
 
 interface TableProps<T> {
   data: T[];
@@ -8,11 +9,12 @@ const GenericTable = <T extends Record<string, any>>({
   data,
 }: TableProps<T>): any => {
   if (!data || data.length === 0) {
+    log.info("GenericTable component rendered with no data");
     return <p>No data available.</p>;
   }
 
   const columns = Object.keys(data[0]);
-
+  log.info("GenericTable component rendered with columns", columns);
   const tableCellStyle = {
     border: "1px solid white",
     padding: "8px",

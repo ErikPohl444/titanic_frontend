@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from "react";
+import log from "../Logging/Logger";
+
 
 interface SurvivedToggleProps {
   initialValue: number;
@@ -15,8 +17,9 @@ const SurvivedToggle: React.FC<SurvivedToggleProps> = ({
     const newValue = survived === 0 ? 1 : 0;
     setSurvived(newValue);
     onToggle(newValue);
+    log.info("SurvivedToggle component toggled to newValue", newValue);
   }, [survived, onToggle]);
-
+  log.info("SurvivedToggle component rendered with initialValue", initialValue);
   return (
     <button onClick={toggle} name="survival button">
       {survived ? "Survived" : "Did not survive"}
