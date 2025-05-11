@@ -1,28 +1,36 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from "react";
 
 interface ToggleProps<T> {
-  options: { value: T, label: string }[];
+  options: { value: T; label: string }[];
   defaultValue: T;
   onChange: (value: T) => void;
+  compareFn?: (a: T, b: T) => boolean; // Optional custom comparison function
 }
 
-function Toggle<T>({ options, defaultValue, onChange }: ToggleProps<T>) {
+function Toggle<T>({
+  options,
+  defaultValue,
+  onChange,
+  compareFn,
+}: ToggleProps<T>) {
   const [value, setValue] = useState<T>(defaultValue);
 
   const toggleValue = useCallback(() => {
-    const nextIndex = (options.findIndex(option => option.value === value) + 1) % options.length;
+    const currentIndex = options.findIndex((option) =>
+      compareFn ? compareFn(option.value, value) : option.value === value
+    );
+    const nextIndex = (currentIndex + 1) % options.length;
     const newValue = options[nextIndex].value;
     setValue(newValue);
     onChange(newValue);
-  }, [value, options, onChange]);
+  }, [value, options, onChange, compareFn]);
 
-  const currentLabel = options.find(option => option.value === value)?.label || '';
+  const currentLabel =
+    options.find((option) =>
+      compareFn ? compareFn(option.value, value) : option.value === value
+    )?.label || "Unknown"; // Fallback to "Unknown" if no match is found
 
-  return (
-    <button onClick={toggleValue}>
-      {currentLabel}
-    </button>
-  );
+  return <button onClick={toggleValue}>{currentLabel}</button>;
 }
 
 export default Toggle;

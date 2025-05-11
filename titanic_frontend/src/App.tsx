@@ -2,41 +2,45 @@ import React, { useState } from "react";
 import "./App.css";
 import TitanicData from "./data/titanic.json";
 import Counter from "./Tables/Counter";
-import GenderToggle from "./Buttons/GenderToggle";
-import SurvivedToggle from "./Buttons/SurvivedToggle";
 import Toggle from "./Buttons/GenericToggleButton";
 import log from "./Logging/Logger";
 
 function App() {
-  const [toggleState, setToggleState] = useState<number>(0);
-  const [genderToggleState, setGenderToggleState] = useState<string>("male");
-
-  const handleToggleChange = (newValue: number) => {
-    setToggleState(newValue);
-  };
-
-  const handleGenderToggleChange = (newValue: string) => {
-    setGenderToggleState(newValue);
-  };
-
-  const survivedGenderFilteredData = TitanicData.filter(
-    (item) =>
-      Number(item.Survived) === toggleState && item.Sex === genderToggleState
-  );
-
   interface Status {
     id: number;
     label: string;
   }
 
-  const statusOptions: { value: Status; label: string }[] = [
-    { value: { id: 1, label: "Active" }, label: "Active" },
-    { value: { id: 2, label: "Inactive" }, label: "Inactive" },
+  const survivedStatusOptions: { value: Status; label: string }[] = [
+    { value: { id: 1, label: "Did not survive" }, label: "Did not survive" },
+    { value: { id: 2, label: "Survived" }, label: "Survived" },
+  ];
+  const genderStatusOptions: { value: Status; label: string }[] = [
+    { value: { id: 1, label: "male" }, label: "male" },
+    { value: { id: 2, label: "female" }, label: "female" },
   ];
 
-  const handleStatusChange = (newStatus: Status) => {
-    console.log("Selected status:", newStatus);
+  const handleSurvivedToggleChange = (newValue: Status) => {
+    setSurvivedToggleState(newValue);
   };
+
+  const handleGenderToggleChange = (newValue: Status) => {
+    setGenderToggleState(newValue);
+  };
+
+  const [survivedToggleState, setSurvivedToggleState] = useState<Status>(
+    survivedStatusOptions[0].value
+  );
+
+  const [genderToggleState, setGenderToggleState] = useState<Status>(
+    genderStatusOptions[0].value
+  );
+
+  const survivedGenderFilteredData = TitanicData.filter(
+    (item) =>
+      Number(item.Survived) === survivedToggleState.id - 1 &&
+      item.Sex === genderToggleState.label
+  );
 
   const tableCellStyle = {
     border: "1px solid white",
@@ -48,11 +52,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Titanic Dataset Front-End Query Tool</h1>
-        <Toggle
-          options={statusOptions}
-          defaultValue={statusOptions[0].value}
-          onChange={handleStatusChange}
-        />
         <h2>Filter by:</h2>
         <table
           style={{ border: "1px solid white", borderCollapse: "collapse" }}
@@ -67,16 +66,20 @@ function App() {
               <td></td>
               <td style={tableCellStyle}>
                 {" "}
-                <SurvivedToggle
-                  initialValue={toggleState}
-                  onToggle={handleToggleChange}
+                <Toggle
+                  options={survivedStatusOptions}
+                  defaultValue={survivedToggleState}
+                  onChange={handleSurvivedToggleChange}
+                  compareFn={(a, b) => a.id === b.id} // Compare Status objects by id
                 />
               </td>
               <td style={tableCellStyle}>
                 {" "}
-                <GenderToggle
-                  initialValue={genderToggleState}
-                  onToggle={handleGenderToggleChange}
+                <Toggle
+                  options={genderStatusOptions}
+                  defaultValue={genderToggleState}
+                  onChange={handleGenderToggleChange}
+                  compareFn={(a, b) => a.id === b.id} // Compare Status objects by id
                 />
               </td>
             </tr>

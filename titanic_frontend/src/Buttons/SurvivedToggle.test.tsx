@@ -4,14 +4,14 @@ import SurvivedToggle from "./SurvivedToggle";
 
 describe("SurvivedToggle Component", () => {
   test("renders with the initial value", () => {
-    render(<SurvivedToggle initialValue={0} onToggle={jest.fn()} />);
+    render(<SurvivedToggle initialValue={"Did not survive"} onToggle={jest.fn()} />);
     const button = screen.getByRole("button", { name: "Did not survive" });
     expect(button).toHaveTextContent("Did not survive");
   });
 
   test("toggles from Did not survive to Survived", () => {
     const mockOnToggle = jest.fn();
-    render(<SurvivedToggle initialValue={0} onToggle={mockOnToggle} />);
+    render(<SurvivedToggle initialValue={"Did not survive"} onToggle={mockOnToggle} />);
 
     const button = screen.getByRole("button", { name: "Did not survive" });
     fireEvent.click(button);
@@ -22,7 +22,7 @@ describe("SurvivedToggle Component", () => {
 
   test("toggles from Survived to Did not survive", () => {
     const mockOnToggle = jest.fn();
-    render(<SurvivedToggle initialValue={1} onToggle={mockOnToggle} />);
+    render(<SurvivedToggle initialValue={"Survived"} onToggle={mockOnToggle} />);
 
     const button = screen.getByRole("button", { name: "Survived" });
     fireEvent.click(button);
@@ -33,7 +33,7 @@ describe("SurvivedToggle Component", () => {
 
   test("calls onToggle callback with the correct value", () => {
     const mockOnToggle = jest.fn();
-    render(<SurvivedToggle initialValue={0} onToggle={mockOnToggle} />);
+    render(<SurvivedToggle initialValue={"Did not survive"} onToggle={mockOnToggle} />);
 
     const button = screen.getByRole("button", { name: "Did not survive" });
     fireEvent.click(button);
