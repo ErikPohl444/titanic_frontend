@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-
+import log from "../Logging/Logger";
 interface ToggleProps<T> {
   options: { value: T; label: string }[];
   defaultValue: T;
@@ -23,13 +23,14 @@ function Toggle<T>({
     const newValue = options[nextIndex].value;
     setValue(newValue);
     onChange(newValue);
+    log.info(`Toggle value changed to: ${newValue}`);
   }, [value, options, onChange, compareFn]);
 
   const currentLabel =
     options.find((option) =>
       compareFn ? compareFn(option.value, value) : option.value === value
     )?.label || "Unknown"; // Fallback to "Unknown" if no match is found
-
+  log.info(`Current label: ${currentLabel}`);
   return <button onClick={toggleValue}>{currentLabel}</button>;
 }
 
