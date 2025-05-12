@@ -42,7 +42,7 @@ function App() {
   const survivedGenderFilteredData = TitanicData.filter(
     (item) =>
       Number(item.Survived) === survivedToggleState.id - 1 &&
-      item.Sex === genderToggleState.label
+      item.Sex === genderToggleState.label && (Number(item.Age) > number)
   );
 
   const tableCellStyle = {
@@ -89,7 +89,7 @@ function App() {
           </tbody>
         </table>
         <NumericEdit value={number} onChange={setNumber} />
-        <p>Value: {number}</p>
+        <p>Age is greater than: {number}</p>
 
         <h2>Filtered count {survivedGenderFilteredData.length}</h2>
         <h3>Data Scrolling</h3>

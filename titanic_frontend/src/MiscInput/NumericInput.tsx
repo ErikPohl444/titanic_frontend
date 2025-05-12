@@ -1,5 +1,4 @@
-// NumericEdit.tsx
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent } from "react";
 
 interface NumericEditProps {
   value: number;
@@ -12,15 +11,12 @@ const NumericEdit: React.FC<NumericEditProps> = ({ value, onChange }) => {
     if (!isNaN(newValue)) {
       onChange(newValue);
     }
+    else {        
+        onChange(0);
+    }
   };
 
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={handleChange}
-    />
-  );
+  return <input type="text" value={`${value}`} onChange={handleChange} />;
 };
 
 export default NumericEdit;
