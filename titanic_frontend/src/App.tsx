@@ -42,8 +42,17 @@ function App() {
   const survivedGenderFilteredData = TitanicData.filter(
     (item) =>
       Number(item.Survived) === survivedToggleState.id - 1 &&
-      item.Sex === genderToggleState.label && (Number(item.Age) > number)
-  );
+      item.Sex === genderToggleState.label &&
+      Number(item.Age) > number
+  ).sort((a, b) => {
+    if (a.Name < b.Name) {
+      return -1;
+    }
+    if (a.Name > b.Name) {
+      return 1;
+    }
+    return 0;
+  });
 
   const tableCellStyle = {
     border: "1px solid white",
