@@ -4,6 +4,7 @@ import TitanicData from "./data/titanic.json";
 import Counter from "./Tables/Counter";
 import Toggle from "./Buttons/GenericToggleButton";
 import log from "./Logging/Logger";
+import NumericEdit from "./MiscInput/NumericInput";
 
 function App() {
   interface Status {
@@ -19,6 +20,8 @@ function App() {
     { value: { id: 1, label: "male" }, label: "male" },
     { value: { id: 2, label: "female" }, label: "female" },
   ];
+
+  const [number, setNumber] = useState(0);
 
   const handleSurvivedToggleChange = (newValue: Status) => {
     setSurvivedToggleState(newValue);
@@ -85,6 +88,8 @@ function App() {
             </tr>
           </tbody>
         </table>
+        <NumericEdit value={number} onChange={setNumber} />
+        <p>Value: {number}</p>
 
         <h2>Filtered count {survivedGenderFilteredData.length}</h2>
         <h3>Data Scrolling</h3>
