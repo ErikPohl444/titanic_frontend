@@ -2,6 +2,8 @@
 
 This project uses React and TypeScript to display passengers on the Titanic.
 
+![Titanic versus 404](./images/titanic_vs_404.jpg)
+
 ## Future Plans
 
 - [ ] Add more detailed passenger data visualization.
