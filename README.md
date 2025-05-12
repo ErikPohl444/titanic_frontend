@@ -6,8 +6,8 @@ This project uses React and TypeScript to display passengers on the Titanic.
 
 ## Future Plans
 
-- [ ] Add more detailed passenger data visualization.
-- [ ] Include filtering and sorting functionality for the passenger list.
+- [x] Add more detailed passenger data visualization.
+- [x] Include filtering and sorting functionality for the passenger list.
 - [ ] Implement a search feature to quickly find passengers.
 
 ## Important Disclaimer
