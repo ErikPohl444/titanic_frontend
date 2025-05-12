@@ -2,10 +2,11 @@ import React, { ChangeEvent } from "react";
 
 interface NumericEditProps {
   value: number;
+  placeholder?: string;
   onChange: (newValue: number) => void;
 }
 
-const NumericEdit: React.FC<NumericEditProps> = ({ value, onChange }) => {
+const NumericEdit: React.FC<NumericEditProps> = ({ value, placeholder, onChange }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
     if (!isNaN(newValue)) {
@@ -16,7 +17,7 @@ const NumericEdit: React.FC<NumericEditProps> = ({ value, onChange }) => {
     }
   };
 
-  return <input type="text" value={`${value}`} onChange={handleChange} />;
+  return <input type="text" value={`${value}`} placeholder={placeholder} onChange={handleChange} />;
 };
 
 export default NumericEdit;

@@ -5,6 +5,8 @@ import Counter from "./Tables/Counter";
 import Toggle from "./Buttons/GenericToggleButton";
 import log from "./Logging/Logger";
 import NumericEdit from "./MiscInput/NumericInput";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 function App() {
   interface Status {
@@ -60,6 +62,23 @@ function App() {
   };
   log.info("App component rendered");
 
+  const BarChartComponent: React.FC = () => {
+    const sortedData = [...survivedGenderFilteredData].sort((a, b) => Number(a.Age) - Number(b.Age)); // Sort in ascending order
+
+  return (
+    <ResponsiveContainer width="100%" height={400}>
+      <BarChart data={sortedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="PassengerId" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="Age" fill="#8884d8" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
   return (
     <div className="App">
       <header className="App-header">
@@ -103,6 +122,8 @@ function App() {
         <h2>Filtered count {survivedGenderFilteredData.length}</h2>
         <h3>Data Scrolling</h3>
         <Counter data={survivedGenderFilteredData} />
+        <h3>Bar Chart</h3>
+        <BarChartComponent />
       </header>
     </div>
   );
